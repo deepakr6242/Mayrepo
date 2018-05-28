@@ -1,0 +1,241 @@
+
+<html>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <select id="cardapp" name="ddlarea">
+
+     <option id="stylesheet21" value="Authorizations" default =''  >please choose value</option>
+     <!-- <option id="stylesheet2" value="card">card</option> -->
+     <option id="stylesheet3" value="cps">cps</option>
+      <option id="stylesheet4" value="css">css</option>
+        </select>
+
+<select id="DropDownList">
+
+</select>
+<!--<script>-->
+<!--document.getElementById("cardapp").onchange = function(){-->
+<!--var sheet=document.getElementById("cardapp").value-->
+
+
+   <!--if (sheet=="cps")-->
+
+
+<!--{-->
+ <!--$("#DropDownList").empty()-->
+<!--var x = "script1,script2";-->
+<!--var splitValues = x.split(",");-->
+
+   <!--for (var i = 0; i < splitValues.length; i++)-->
+   <!--{-->
+      <!--var opt = document.createElement("option");-->
+
+      <!--// Add an Option object to Drop Down/List Box-->
+      <!--document.getElementById("DropDownList").options.add(opt);-->
+
+      <!--// Assign text and value to Option object-->
+      <!--opt.text = splitValues[i];-->
+      <!--opt.value = splitValues[i];-->
+    <!--}-->
+
+		<!--}-->
+<!--else if (sheet=="css")-->
+
+
+<!--{-->
+ <!--$("#DropDownList").empty()-->
+<!--var x = "script3,script4";-->
+<!--var splitValues = x.split(",");-->
+
+   <!--for (var i = 0; i < splitValues.length; i++)-->
+   <!--{-->
+      <!--var opt = document.createElement("option");-->
+
+      <!--// Add an Option object to Drop Down/List Box-->
+      <!--document.getElementById("DropDownList").options.add(opt);-->
+
+      <!--// Assign text and value to Option object-->
+      <!--opt.text = splitValues[i];-->
+      <!--opt.value = splitValues[i];-->
+    <!--}-->
+
+		<!--}-->
+
+
+<!--// 		else if (sheet=="css")-->
+<!--// $("#DropDownList").empty()-->
+
+<!--// {-->
+<!--// var x = "a,Jon,St,M,R";-->
+<!--// var splitValues = x.split(",");-->
+
+<!--//    for (var i = 0; i < splitValues.length; i++)-->
+<!--//    {-->
+<!--//       var opt = document.createElement("option");-->
+
+<!--//       // Add an Option object to Drop Down/List Box-->
+<!--//       document.getElementById("DropDownList").options.add(opt);-->
+
+<!--//       // Assign text and value to Option object-->
+<!--//       opt.text = splitValues[i];-->
+<!--//       opt.value = splitValues[i];-->
+<!--//     }-->
+
+		<!--// }-->
+
+
+
+<!--}-->
+<!--</script>-->
+
+<script>
+
+var ajaxResult=[];
+    $(document).ready(function() {
+
+    $('#cardapp').change(function() {
+    var env =  document.getElementById("cardapp").value;
+
+
+
+     if (env=='cps'){
+        console.log("this is val paased")
+
+        var request=$.ajax({
+        async:false,
+        type: "GET",
+	   	url: "cardscript/",
+	   	data:"{{ 'scripts '}}",
+	   	datatype:"json",
+	   	success:function(data){
+
+	   	ajaxResult.push(data);
+	   	console.log(data)
+	   	window.xml=data;
+	   	}
+	   	});
+	   	request.done( function(data)
+
+	   {
+
+		 <!--alert(url1)-->
+		 $('.success').show();
+		 console.log("after ajax call" )
+
+
+		 var scr=data
+		 console.log("serialised data is ::"  ,scr)
+
+		 $("#DropDownList").empty()
+		 console.log("dropdown emptied")
+		 var scr=data
+		 console.log("serialised data  after emptied::"  ,scr)
+		 var strr=scr.toString()
+		 console.log("stringified data:",strr)
+
+		 var splitValues = strr.split(",");
+		 for (var i = 0; i < splitValues.length; i++) {
+            var opt = document.createElement("option");
+
+      // Add an Option object to Drop Down/List Box
+            document.getElementById("DropDownList").options.add(opt);
+
+      // Assign text and value to Option object
+            opt.text = splitValues[i];
+            opt.value = splitValues[i];
+      }
+
+
+		 console.log("split called")
+
+
+	   });
+
+	   request.fail(function(jqXHR, textStatus)
+	   {
+	    <!--var e=$('.fail').show().append(errorThrown);-->
+	   alert("Issue in executing the scripts please  contact  Dev"+""+url1)
+
+
+	   });
+
+	   }
+	   else if(env=="css"){
+	   <!--console.log("this is val paased")-->
+
+        var request=$.ajax({
+        async:false,
+        type: "GET",
+	   	url: "cardapplication/",
+	   	data:"{{ 'application '}}",
+	   	datatype:"json",
+	   	success:function(data){
+
+	   	ajaxResult.push(data);
+	   	console.log("data of css :",data )
+	   	window.xml=data;
+	   	}
+	   	});
+	   	request.done( function(data)
+
+	   {
+
+		 $('.success').show();
+       console.log("after ajax call" )
+
+
+       var scr=data
+       console.log("serialised data is ::"  ,scr)
+
+       $("#DropDownList").empty()
+       console.log("dropdown emptied")
+       var scr=data
+       console.log("serialised data  after emptied::"  ,scr)
+       var strr=scr.toString()
+       console.log("stringified data:",strr)
+
+       var splitValues = strr.split(",");
+
+       <!--alert(scr[1])-->
+       <!--alert(scr[2])-->
+       <!--alert(scr[3])-->
+       <!--alert(scr[4])-->
+       <!--alert(scr[5])-->
+       <!--alert(scr[6])-->
+       for (var i = 0; i < splitValues.length; i++) {
+            var opt = document.createElement("option");
+
+      // Add an Option object to Drop Down/List Box
+            document.getElementById("DropDownList").options.add(opt);
+
+      // Assign text and value to Option object
+            opt.text = splitValues[i];
+            opt.value = splitValues[i];
+      }
+
+
+       console.log("split called")
+
+	   });
+
+	   request.fail(function(jqXHR, textStatus)
+	   {
+	    <!--var e=$('.fail').show().append(errorThrown);-->
+	   alert("Issue in executing the scripts please  contact  Dev"+""+url1)
+
+
+	   });
+	   }
+
+
+	});
+
+
+    });
+
+
+</script>

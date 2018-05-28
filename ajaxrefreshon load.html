@@ -1,0 +1,36 @@
+   
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajax Call After Page Load</title>
+    </head>
+    <body>
+        
+        <!-- Content is blank by default -->
+        <div id="content"></div>
+        
+        <!-- Include the JQuery library -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script>
+        //When the page has loaded.
+        $( document ).ready(function(){
+            //Perform Ajax request.
+            $.ajax({
+                url: 'test.html',
+                type: 'get',
+                success: function(data){
+                    //If the success function is execute,
+                    //then the Ajax request was successful.
+                    //Add the data we received in our Ajax
+                    //request to the "content" div.
+                    $('#content').html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    var errorMsg = 'Ajax request failed: ' + xhr.responseText;
+                    $('#content').html(errorMsg);
+                  }
+            });
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+<html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body>
+    <div>
+        <span>Select the course : </span>
+        <select id="ddlView">
+            <option value="0">Select</option>
+            <option value="1">Java Script</option>
+            <option value="2">CSS</option>
+            <option value="3">JQuery</option>
+            <option value="3">HTML</option>
+            <option value="3">C#</option>
+        </select>
+    </div>
+    <br >
+    <input type="button" class="btn" value="Submit" id="btnSubmit" onclick="ddlValidate();" />
+
+
+<script type="text/javascript">
+        function ddlValidate() {
+            var e = document.getElementById("ddlView");
+            var optionSelIndex = e.options[e.selectedIndex].value;
+            var optionSelectedText = e.options[e.selectedIndex].text;
+            if (optionSelIndex == 0) {
+                alert("Please select a Course");
+            }
+            else {
+
+
+
+                alert("Success !! You have selected Course : " + optionSelectedText)
+
+
+
+            }
+        }
+    </script>
+
+     <select  type="text" class="que_ans required" name="answer[12]" id="answer_12" size="1" title="This is required field" >
+    <option value="0" selected> -- Select Response -- </option>
+    <option value="1">Not Satisfied</option>
+    <option value="2">Somewhat Satisfied</option>
+</select>
+<select  type="text" class="que_ans required" name="answer[13]" id="answer_13" size="1" title="This is required field">
+    <option value="0" selected> -- Select Response -- </option>
+    <option value="1">Not Satisfied</option>
+    <option value="2">Somewhat Satisfied</option>
+</select>
+
+<script>
+   $('select.required').each(function () {
+        var message = $(this).attr('title');
+        if($(this).val() == '' || $(this).val() == 0) {                
+              alert(message);
+              $(this).focus();
+              breakout = true;
+              return false;
+        }
+
+    
+});
+</script>
+
+    <p>
+        <select id="ad_type" name="ad_type">
+            <option value="" selected="selected">Select premium ad type</option>
+            <option value="<?php echo TYPE_USER;?>">Featured Agent</option>
+            <option value="<?php echo TYPE_LISTING;?>">Featured Listing</option>
+        </select>
+        <label for="ad_type" class="labelStrong">Advertising Type</label>
+    </p>
+    <p>
+        <select id="ad_duration" name="ad_duration">
+            <option value="" selected="selected">Select premium ad duration</option>
+            <option value="weekly">Weekly</option>
+            <option value="fortnightly">Fortnightly</option>
+            <option value="monthly">Monthy</option>
+        </select>
+        <label for="ad_duration" class="labelStrong">Advertising Duration</label>
+    </p>
+
+    <p>
+        <div id="calender">
+        </div>
+    </p>
+    
+        <input type="submit" name="submit" value="Submit" id="submitorder" ></input>
+
+    
+
+
+
+<script type="text/javascript">
+    
+$('#submitorder').attr('disabled', 'disabled');
+
+function updateFormEnabled() {
+    if (verifyAdSettings()) {
+        $('#submitorder').attr('disabled', '');
+    } else {
+        $('#submitorder').attr('disabled', 'disabled');
+    }
+}
+
+function verifyAdSettings() {
+    if ($('#ad_duration').val() != '' && $('#ad_type').val() != '') {
+        return true;
+    } else {
+        return false
+    }
+}
+
+$('#ad_duration').change(updateFormEnabled);
+
+$('#ad_type').change(updateFormEnabled);
+
+
+</script>>
+
+
+
+</body>
+</html>

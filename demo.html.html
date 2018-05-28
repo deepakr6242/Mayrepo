@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <select id="people"></select>
+  </body>
+  <script type="text/JavaScript">
+    //get a reference to the select element
+$select = $('#people');
+//request the JSON data and parse into the select element
+$.ajax({
+  url: 'person.JSON',
+  dataType:'JSON',
+  success:function(data){
+    //clear the current content of the select
+    $select.html('');
+    //iterate over the data and append a select option
+    $.each(data.person, function(key, val){
+      $select.append('<option id="' + val.id + '">' + val.name + '</option>');
+    })
+  },
+  error:function(){</strong>
+    //if there is an error append a 'none available' option
+    $select.html('<option id="-1">none available</option>');
+  }
+});
+  </script>
+</html>

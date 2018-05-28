@@ -1,0 +1,108 @@
+
+<html>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <select id="cardapp" name="ddlarea">
+       
+     <option id="stylesheet21" value="Authorizations" default =''  >please choose value</option>
+     <!-- <option id="stylesheet2" value="card">card</option> -->
+     <option id="stylesheet3" value="cps">cps</option>
+      <option id="stylesheet4" value="css">css</option>
+        </select>
+
+<select id="DropDownList">
+
+</select>
+<script>  
+document.getElementById("cardapp").onchange = function(){
+var sheet=document.getElementById("cardapp").value
+
+// if (sheet=="card"){
+// var x = "Jenny,John,Stephanie,Marc,Ryan";
+// var splitValues = x.split(",");
+  
+//    for (var i = 0; i < splitValues.length; i++) {
+//       var opt = document.createElement("option");
+
+//       // Add an Option object to Drop Down/List Box
+//       document.getElementById("DropDownList").options.add(opt);
+
+//       // Assign text and value to Option object
+//       opt.text = splitValues[i];
+//       opt.value = splitValues[i];
+//       }
+//    }
+   
+   if (sheet=="css")
+
+
+{
+ $("#DropDownList").empty()
+var x = "Jenny,John,kkk,sdsds,sdsds,sdsdsds,sdsdsd,sdsdsd,sdsdsd,sdsd";
+var splitValues = x.split(",");
+  
+   for (var i = 0; i < splitValues.length; i++) 
+   {
+      var opt = document.createElement("option");
+
+      // Add an Option object to Drop Down/List Box
+      document.getElementById("DropDownList").options.add(opt);
+
+      // Assign text and value to Option object
+      opt.text = splitValues[i];
+      opt.value = splitValues[i];
+    }
+
+		}
+else if (sheet=="cps")
+
+
+{
+ $("#DropDownList").empty()
+var x = "Jenny,Ryan,efef,efefe,efefe,efef,efefe,efe";
+var splitValues = x.split(",");
+  
+   for (var i = 0; i < splitValues.length; i++) 
+   {
+      var opt = document.createElement("option");
+
+      // Add an Option object to Drop Down/List Box
+      document.getElementById("DropDownList").options.add(opt);
+
+      // Assign text and value to Option object
+      opt.text = splitValues[i];
+      opt.value = splitValues[i];
+    }
+
+		}
+
+
+// 		else if (sheet=="css")
+// $("#DropDownList").empty()
+
+// {
+// var x = "a,Jon,St,M,R";
+// var splitValues = x.split(",");
+  
+//    for (var i = 0; i < splitValues.length; i++) 
+//    {
+//       var opt = document.createElement("option");
+
+//       // Add an Option object to Drop Down/List Box
+//       document.getElementById("DropDownList").options.add(opt);
+
+//       // Assign text and value to Option object
+//       opt.text = splitValues[i];
+//       opt.value = splitValues[i];
+//     }
+
+		// }	
+   
+	 
+
+}
+</script>

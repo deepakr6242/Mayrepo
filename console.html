@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html >
+<head>
+<title>Lightsaber</title>
+{% load staticfiles %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'webapp/css/bootstrap.min.css' %}" type = "text/css"/>
+<link rel="stylesheet" href="{% static 'webapp/css/style.css' %}" type = "text/css"/>
+</head>
+<body id="bg">
+  <div id="main">
+	  <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="http://10.144.169.116:8091/webapp">Light<span class="logo_colour">Saber</span></a></h1>
+          <h2>Bringing Test Automation </h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li class="selected"><a href="http://10.144.169.116:8091/webapp">LightSaber</a></li>
+          <li><a href="examples.html">CMS</a></li>
+          <li><a href="another_page.html">TDM</a></li>
+          <li><a href="contact.html">Chat Room</a></li>
+          <li><form action="{% url 'logout' %}" method="post">
+{% csrf_token %}
+<button type="submit"  class ="button"value="logout">logout</button>
+</form></li>
+        </ul>
+      </div>
+	  </div>
+    </div>
+{% block content %}
+<!--inheriting the webapp/home.html-->
+{% endblock %}
+
+<br><br>
+<div id ="site_content">
+<pre><h1>The Pending queue  info is :</h1>{{ queueinfo }}</pre>
+
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+		<div class="tab_container">
+
+		  <div class="tabs">
+			<nav class="tabs__navigation">
+			  <a class="tabs__link tabs__link--active" href="#first">Console </a>
+			  <a class="tabs__link" href="#second">Cart</a>
+			  <a class="tabs__link" href="#third">Lab Info</a>
+			</nav>
+<button class="button"  id ="BOrun" type="button">Queue Info</button>
+			<p class="tabs__section" id="first">
+			   
+
+
+
+			</p>
+			
+			<p class="tabs__section" id="second">
+				
+
+			</p></br></br>
+
+			<p class="tabs__section" id="third">
+			    <table>
+					<tr><td>VD1</td>
+					
+					<td>VDI2</td></tr>
+					<tr><td>VDI3</td><td>VDI4</td></tr>
+					<tr><td>VDI5</td><td>VDI6</td></tr>
+					<tr><td>VDI7</td><td>VDI8</td></tr>
+					<tr><td>VDI9</td><td>VDI10</td></tr>
+				</table>
+			
+			</p>
+		  </div>
+
+
+		</div>
+
+
+      </div>
+
+      <!-- <button class="button"  id ="BOrun" type="button">Run script</button> -->
+      <p>Refresh:
+        <a href="#">
+          <span class="glyphicon glyphicon-refresh" id ="BOrun"></span>
+        </a>
+      </p>
+
+    <script>
+(function append(){
+	$("#BOrun").click(function(e) {
+    e.preventDefault();
+    var request=$.ajax({
+        type: "POST",
+        url: "consoleprogress/",
+        data:"{{ 'application'}}",
+        datatyoe:"json",
+        beforeSend:function(){
+        	$('#BOrun').text('Loading...');
+        },
+        success: function(data) {
+            // alert(data);
+            $('#BOrun').text('Queue Info');
+""
+
+        },
+        
+
+
+        error: function(data) {
+            alert('Technical error .Please try again later.');
+        }
+
+
+    });
+    	request.done( function(data)
+	   {
+	   	$('.success').show();
+	   	console.log("after ajax call ")
+        var queue=data
+        $( "#first" ).show( 2000  );	
+        // $("#first").empty()
+
+        
+        $("#first").text("Loading your data.......... ")
+
+
+        $("#first").empty()
+
+
+        console.log("data out of ajax call : "+queue)
+        var queuestr =queue.toString()
+        console.log(queuestr)
+        var splittext=queuestr.split(" , ")
+        for (var i = 0; i < splittext.length; i++) {
+        	// var para = document.createElement("P");
+
+        	var t=document.createTextNode(splittext[i]);
+        	$("#first").append(t)
+
+        	// para.appendChild(t)
+
+         //    document.body.appendChild(para);
+
+        	console.log(splittext[i])
+        }
+
+	   });
+
+    
+});});
+    
+    </script>
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script>
+        //When the page has loaded.
+        var hello= $( document ).ready(function(){
+            //Perform Ajax request.
+            $.ajax({
+                url: 'http://10.144.169.116:8095/webapp/',
+                type: 'get',
+                data:"{1}",
+                success: function(data){
+
+                    //If the success function is execute,
+                    //then the Ajax request was successful.
+                    //Add the data we received in our Ajax
+                    //request to the "content" div.
+                    // $('#content').html(data);
+                    alert("success")
+                },
+                complete: function() {
+alert("Refresh completed")
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // var errorMsg = 'Ajax request failed: ' + xhr.responseText;
+                    // $('#content').html(errorMsg);
+                    alert("issue in ")
+                  }
+            });
+        });
+        </script>
+<script>
+(function worker() {
+  $.ajax({
+    url: 'http://10.144.169.116:8095/webapp/',
+    async:'True',
+    success: function(data) {
+      $('.result').html(data);
+    },
+    complete: function() {
+      alert("reload initiated")
+      // Schedule the next request when the current one's complete
+      // setTimeout(worker, 2000);
+      alert("reload completed")
+    }
+  });
+})();
+</script>
+      
+	
+</style>
+<a href="http://localhost:8000/webapp/login" class="button">Login  to continue</a>
+</body>
+
+<br><br><br><br><br><br><br><br><br>
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

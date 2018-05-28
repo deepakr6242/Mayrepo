@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Script - Add options to select box dynamically</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            $(function () {
+                $('#addopt').click(function () {
+                    var newopt = $('#newopt').val();
+                    if (newopt == '') {
+                        alert('Please enter something!');
+                        return;
+                    }
+ 
+                    //check if the option value is already in the select box
+                    $('#opt option').each(function (index) {
+                        if ($(this).val() == newopt) {
+                            alert('Duplicate option, Please enter new!');
+                        }
+                    })
+ 
+                    //add the new option to the select box
+                    $('#opt').append('<option value=' + newopt + '>' + newopt + '</option>');
+ 
+                    //select the new option (particular value)
+                    $('#opt option[value="' + newopt + '"]').prop('selected', true);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h3>jQuery Script - Add options to select box dynamically - <a href="">Tutorial is here</a></h3>
+        <p>New Option: <input type="text" id="newopt" /> <input type="button" value="Add script" id="addopt" /></p>
+ 
+        <p>Select: 
+            <select id="opt">
+                <option value="Select">Select</option>
+                <option value="One">One</option>
+                <option value="Two">Two</option>
+            </select>
+        </p>
+ 
+ 
+    </body>
+    </html>
